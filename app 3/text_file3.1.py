@@ -1,0 +1,20 @@
+import pytesseract as tes
+from PIL import Image
+
+def write(fname,image_list):
+      fname=fname+'.txt'
+      f=open(fname,'w')
+      for i in image_list:
+            img=Image.open(i)
+            text=tes.image_to_string(img,lang='eng')
+            details=text.split('\n')
+            new=[]
+            for k in details:
+                  if len(k)>3:
+                        new.append(k)
+            print(new)
+            for j in new:
+                  f.write(j+'\n')
+            f.write('----------------------------------')
+            f.write('\n')
+      f.close()
